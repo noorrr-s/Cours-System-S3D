@@ -1,0 +1,95 @@
+TD : Rappel de C
+
+1. de quand date le C ? de quoi s'inspire-t-il ?
+   - Le version stable du C date de 1972, il q'inqpire du langage B, BCPL, et du système UNIX
+
+2. qu'est-ce que BCPL ?
+   - Le BCPL est un langage de programmation impératif et procédural conçu à l'origine pour faciliter l'écriture de compilateurs et de logiciels système
+   
+3. y'a t'il plusieurs versions de C ? quelle est la version la plus récente ?
+   - Oui il en existe plusieurs ( 6 versions officielles), la plus récente est le C23
+
+4. quel est le lien entre le C et UNIX? quel est le lien entre le C et Java ?
+   - le langage C a été crée spécifiquement pour réécrire et développer le système d'exploitation UNIX. Le langage C est considéré comme étant le "grand-père" de Java, car Java a été conçu en s'inspirant directement de la syntaxe du C et C++, donc il y à beaucoup de resemblance entre les deux.
+
+5. quelle est la structure d'un programme C ?
+   - La structure d'un programme en C suit une organisation logique et séquentielle très précise. Les éléments doivent être déclarés dans un ordre particulier :
+   // 1. Directives de préprocesseur (Inclusions de bibliothèques)
+#include <stdio.h>
+// 2. Déclarations de constantes et de macros
+#define PI 3.14159
+// 3. Prototypes de fonctions (Optionnel mais recommandé)
+void saluer(void);
+
+// 4. La fonction principale (Le point d'entrée obligatoire)
+int main(void) {
+    saluer();   // Instructions du programme
+    printf("La valeur de PI est %f\n", PI);
+    
+    return 0; // Fin du programme (0 indique que tout s'est bien passé)
+}
+
+// 5. Définition des fonctions secondaires
+void saluer(void) {
+    printf("Bonjour !\n");
+}
+
+
+6. qu'est ce que le préprocesseur et à quoi sert-il ?
+   - c'est un programme interne au compilateur qui intervient lors de la toute première étape de la transformation de votre code source en langage machine.
+
+7. qu'est ce qu'un fichier Makefile ?
+   - Un Makefile est un fichier de configuration utilisé par l'outil make pour automatiser la compilation d'un projet informatique. Au lieu de taper manuellement de longues commandes de compilation pour chaque fichier source, le Makefile définit des règles de dépendance.
+
+8. quels sont les types de base du C ?
+   - les entiers, les float, void, et les booléens
+
+9. qu'est ce qu'une structure ?
+   - Une structure est un type de donnée personnalisé qui regroupe plusieurs variables de types différents sous un seul nom. Exemple : Une structure struct Personne peut contenir un char nom[50], un int age, et un float taille.
+
+10. qu'est ce qu'un pointeur ?
+    - - Un pointeur est une variable spéciale qui ne contient pas une valeur classique (comme un nombre ou un texte), mais l'adresse mémoire d'une autre variable. Il "pointe" vers l'endroit de la mémoire où la donnée est stockée. ex: int *ptr;
+
+11. comment savoir la tailles d'un variable ?
+    - On utilise l'opérateur natif sizeof. Il retourne la taille en octets d'une variable ou d'un type. 
+    int x;
+printf("Taille de x : %zu octets\n", sizeof(x)); 
+    
+12. comment connaître la valeur des octets d'un entier ?
+    - Pour inspecter les octets individuels d'un entier, on extrait son adresse et on la traite comme un pointeur vers un tableau d'octets (unsigned char*).
+    int nombre = 0x12345678;
+unsigned char *pointeur_octet = (unsigned char *)&nombre;
+
+13. comment connaître la valeur d'un octet connaissant son adresse ?
+    - On utilise l'opération de déréférencement (le symbole *) sur un pointeur typé sur un octet (uint8_t* ou unsigned char*).
+uintptr_t adresse_brute = 0x7fff5fbff7c0; // Exemple d'adresse
+unsigned char *ptr = (unsigned char *)adresse_brute;
+unsigned char valeur_octet = *ptr; 
+
+14. comment est stocké un tableau à une dimension ?
+    - Un tableau à une dimension est stocké en mémoire de manière contiguë (les éléments sont collés les uns après les autres). Si vous avez un tableau de 5 entiers, l'élément tableau[1] se situe immédiatement après l'élément tableau[0] en mémoire, sans aucun espace vide entre eux.
+    
+15. comment est stocké un tableau à deux dimensions ?
+    - En C, la mémoire est linéaire. Un tableau à deux dimensions (comme une grille/matrice) est aplati et stocké ligne par ligne de manière contiguë (ordonnancement "Row-major").
+• Exemple : Pour un tableau M[2][3], la mémoire contiendra d'abord toute la première ligne : M[0][0], M[0][1], M[0][2], immédiatement suivie de la deuxième ligne : M[1][0], M[1][1], M[1][2].
+
+16. dans quel ordre les octets d'un entier sur 16 bits sont-ils stockés ?
+    - L'ordre dépend de l'architecture du processeur de la machine, ce qu'on appelle l'endianness : Big-Endian (gros-boutiste) , En Little-Endian (petit-boutiste).
+    Exemple pour l'entier 0x1234 : En Little-Endian, la mémoire affichera 34 puis 12. En Big-Endian, elle affichera 12 puis 34.
+    
+17. comment peut-on manipuler des chaînes de caractères ?
+    - n C, une chaîne de caractères n'est pas un type de base, c'est un simple tableau de char qui se termine obligatoirement par le caractère nul \0 (qui marque la fin de la chaîne). Pour les manipuler, on utilise les fonctions de la bibliothèque standard <string.h> :
+• strlen() pour la longueur.
+• strcpy() pour copier.
+• strcat() pour concaténer (fusionner).
+• strcmp() pour comparer.
+
+18. est-ce que les chaînes permettent de stocker de l'UTF8 ?
+    - Oui. Comme l'UTF-8 est conçu pour être rétrocompatible avec le codage ASCII, une séquence de texte en UTF-8 n'est rien d'autre qu'une suite d'octets ne contenant jamais l'octet 0 au milieu. 
+    
+19. qu'est-ce qu'un débogueur ? donnez un exemple de débogueur pour C et pour Java ?
+    - Un débogueur est un outil de développement qui permet d'analyser le comportement d'un programme pendant son exécution. Il permet de mettre le programme en pause, d'exécuter le code ligne par ligne, et d'inspecter ou modifier la valeur des variables en temps réel pour traquer les bugs.
+Exemple pour le C : GDB (GNU Debugger) ou LLDB.
+pour Java : JDB (Java Debugger), souvent intégré visuellement directement dans les IDE comme IntelliJ IDEA.
+
+
