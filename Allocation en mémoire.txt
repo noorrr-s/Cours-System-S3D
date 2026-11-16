@@ -1,0 +1,107 @@
+Allocation en mémoire en C (seance 2)
+
+1. comment la mémoire est-elle organisée dans un processus linux ?
+
+Lorsqu'on lance un programme sous Linux, le système crée un processus et lui attribue un espace d'adressage virtuel. Cet espace mémoire est généralement organisé en plusieurs zones : stack, memory mapping, heap, bss segment, data segment
+
+2. Le code source d'un programme est-il en mémoire ? Où ?
+
+Oui, le code source est stocké sur le disque dur. Lors de l'exécution, le programme est chargé dans la mémoire vive (RAM).
+
+3. Les variables d'un programme sont-elles en mémoire ? Où ?
+
+Oui, les variables sont stockées dans la mémoire vive (RAM) pendant l'exécution du programme.
+
+4. Les variables sont-elles stockées de manière permanente ?
+
+Non, les variables classiques disparaissent lorsque le programme s'arrête.
+
+5. Y a-t-il des zones mémoire temporaires ?
+
+Oui, la mémoire vive contient des zones temporaires. Elles servent à stocker les variables et les données pendant l'exécution.
+
+6. Comment les variables des fonctions sont-elles gérées ?
+
+Les variables locales sont créées lorsque la fonction est appelée. Elles sont supprimées lorsque la fonction se termine.
+
+7. Comment définir un tableau de taille fixe dans une fonction ?
+
+On déclare un tableau avec une taille précise. Par exemple, en C : int tab[10];
+
+8. Comment définir un tableau dont on ne connaît pas la taille à l'avance ?
+
+On utilise une allocation dynamique de mémoire avec malloc() en C. La taille est alors définie pendant l'exécution du programme.
+
+
+9. Qu'est-ce qu'une allocation statique ?
+
+C'est une réservation de mémoire dont la taille est connue à l'avance. Elle est généralement définie dans le code.
+
+10. Qu'est-ce qu'une allocation dynamique ?
+
+C'est une réservation de mémoire pendant l'exécution du programme. Sa taille peut être choisie à ce moment-là.
+
+11. Comment s'appelle la zone où se fait l'allocation dynamique ?
+
+Elle s'appelle le tas (heap).
+
+12. Où est cette zone ?
+
+Elle se trouve dans la mémoire vive (RAM), dans l'espace mémoire du programme.
+
+13. Quelles sont les tailles des zones d'allocation statique et dynamique ?
+
+La taille de l'allocation statique est généralement fixée à l'avance. La taille du tas dépend de la mémoire disponible et des limites du système.
+
+14. Comment s'utilise la fonction malloc ?
+
+malloc() permet de réserver de la mémoire dynamiquement.
+
+Exemple:
+int *p = malloc(10 * sizeof(int));
+
+sa réserve de la mémoire pour 10 entiers.
+
+15. Comment s'utilise la fonction free ?
+
+free() permet de libérer la mémoire réservée avec malloc().
+
+Exemple : free(p);
+
+16. Comment accéder à la mémoire allouée ?
+
+On utilise un pointeur pour accéder à la mémoire réservée.
+Exemple:
+*p = 10;
+
+17. Combien peut-on allouer de mémoire ?
+
+On peut allouer autant de mémoire que le système le permet. Cela dépend de la mémoire disponible.
+
+18. Peut-on créer des variables de cette manière ?
+
+Oui, on peut créer des variables dynamiques avec malloc().
+
+Exemple :
+int *p = malloc(sizeof(int));
+
+19. Qu'est-ce qu'un pointeur ? Peut-on faire des opérations sur les pointeurs ?
+
+Un pointeur est une variable qui contient l'adresse mémoire d'une autre variable. Oui, on peut effectuer des opérations sur les pointeurs, comme l'addition ou la soustraction.
+
+20. Si p est un pointeur, que vaut p+1 ? Qu'est-ce que * et & ?
+
+    p + 1 : désigne l'adresse de l'élément suivant.
+    *p : permet d'accéder à la valeur située à l'adresse contenue dans p.
+    &variable : permet de récupérer l'adresse mémoire d'une variable.
+
+Exemple :
+int a = 5;
+int *p = &a;
+
+    a vaut 5.
+    &a donne l'adresse de a.
+    p contient l'adresse de a.
+    *p vaut 5.
+
+
